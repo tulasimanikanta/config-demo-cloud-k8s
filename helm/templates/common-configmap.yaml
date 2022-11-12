@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: common-config-map-{{ .Values.env }}
+  namespace: ns-{{ .Values.env }}
+data:
+  application.yml: |-
+    {{- $currentScope := .Values.app.configpath }}
+      {{- $files := .Files }}
+      {{- range $path, $_ :=  .Files.Glob  "**.yaml" }}
+
+        {{- with $currentScope }}
+          {{- $files.Get $path | nindent 4 }}
+        {{- end }}
+    {{- end }}

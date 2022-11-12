@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: featureflags-config-map-{{ .Values.env }}
+  namespace: ns-{{ .Values.env }}
+data:
+  featureflag.yml: |-
+    featureflags:
+      feature-flag-configmap-flag1: "true"
+      feature-flag-configmap-flag2: "true"

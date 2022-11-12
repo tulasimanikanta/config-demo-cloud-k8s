@@ -1,0 +1,10 @@
+env: local
+name: spring-boot-config-map-demo
+app:
+  kubernetes:
+    io/managed-by: Helm
+  configpath: "./config/local/common"
+meta:
+  helm:
+    sh/release-name: spring-boot-config-map-demo
+    sh/release-namespace: default

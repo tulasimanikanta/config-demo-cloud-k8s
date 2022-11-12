@@ -1,0 +1,6 @@
+application:
+  roles:
+    - ROLE_READ
+    - ROLE_TEST
+    - ROLE_WRITE
+    - ROLE_UPDATE

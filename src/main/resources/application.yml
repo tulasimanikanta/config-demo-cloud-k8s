@@ -1,0 +1,14 @@
+management:
+  endpoint:
+    refresh:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#local feature flags
+featureflags:
+  local-app-flag1: true
+  local-app-flag2: true
+  common-configmap-flag2: false
+  feature-flag-configmap-flag1: false

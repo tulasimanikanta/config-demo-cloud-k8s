@@ -1,0 +1,3 @@
+featureflags:
+  common-configmap-flag1: "true"
+  common-configmap-flag2: "true"

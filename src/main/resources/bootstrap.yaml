@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: config-k8s-demo
+  cloud:
+    kubernetes:
+      enabled: ${K8S_ENABLED:false}
+      reload:
+        enabled: true
+        mode: polling
+        period: 15000
+      config:
+        sources:
+          # Spring Cloud Kubernetes will look up additional config maps
+          - name: common-config-map-local
+          - name: featureflags-config-map-local
+#        paths: /etc/config/application.yml

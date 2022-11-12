@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.name }}
+  name: {{ .Values.name }}-deployment
+  namespace: ns-{{ .Values.env }}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}-pod
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}-pod
+    spec:
+      serviceAccountName: pod-reader-account
+      containers:
+        - name: {{ .Values.name }}
+          image: config-demo:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+{{/*              Below volume mounting is not needed in case of using cloud k8s*/}}
+          volumeMounts:
+            - name: config-vol
+              mountPath: /etc/config
+          env:
+            - name: SPRING_CONFIG_ADDITIONALLOCATION
+              value: file:/etc/config/
+            - name: K8S_ENABLED
+              value: "true"
+      volumes:
+        - name: config-vol
+          configMap:
+            name: common-config-map-{{ .Values.env }}
